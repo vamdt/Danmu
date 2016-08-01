@@ -31,18 +31,28 @@ namespace Danmu
            
         }
 
-        private void playButton_Click(object sender, RoutedEventArgs e)
+            Random rand = new Random();
+        private void Shoot()
         {
             TextBlock danmu = new TextBlock();
             danmu.Text = "23333333333333333333333333333333333333";
-            playground.Children.Add(danmu);
+            danmu.Margin = new Thickness(0, rand.NextDouble() * 500, 0, 0);
+            Playground.Children.Add(danmu);
             DoubleAnimation animation = new DoubleAnimation();
-            animation.From = playground.RenderSize.Width;
+            animation.From = Playground.RenderSize.Width;
             animation.To = -danmu.DesiredSize.Width - 1000;
             animation.SpeedRatio = 0.1;
             TranslateTransform transform = new TranslateTransform();
             danmu.RenderTransform = transform;
             transform.BeginAnimation(TranslateTransform.XProperty, animation);
+        }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i =0; i<10; i++)
+            {
+                Shoot();
+            }
         }
     }
 }
