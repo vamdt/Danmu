@@ -11,7 +11,7 @@
         Topmost="True"
         Background="White"
         ShowInTaskbar="False"
-        Height="800" Width="600" Top="0" Left="0"  Loaded="Window_Loaded">
+        Height="600" Width="800" Top="0" Left="0"  Loaded="Window_Loaded">
     <Grid Name="Playground">
         <Button Name="PlayButton" Click="PlayButton_Click" Width="60" Height="30"> haha</Button>
     </Grid>
