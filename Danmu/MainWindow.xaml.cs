@@ -30,10 +30,11 @@ namespace Danmu
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             linesCount = ((int)(Playground.ActualHeight - paddingTop)) % lineHeight;
+
         }
 
         private double paddingTop = 5;
-        private int lineHeight = 16;
+        private int lineHeight = 20;
         private int linesCount;
 
         private Random rand = new Random();
@@ -45,7 +46,7 @@ namespace Danmu
 
         private int RandomLineNumber()
         {
-            return rand.Next(linesCount);
+            return rand.Next(1, linesCount + 1);
         }
 
 
@@ -54,12 +55,18 @@ namespace Danmu
             TextBlock danmu = new TextBlock();
             danmu.Text = "23333333333333333333333333333333333333";
             danmu.TextWrapping = TextWrapping.Wrap;
-            double y = DanmuYPosition(RandomLineNumber());
+            int ln = RandomLineNumber();
+            double y = DanmuYPosition(ln);
             danmu.Text += " linesCount:" +  linesCount;
-            danmu.Text += " position:" + y.ToString();
+            danmu.Text += " linesNumber:" +  ln;
+            danmu.Text += " yposition:" + y.ToString();
             danmu.Text += " height:" + danmu.RenderSize.Height;
             danmu.Text += " width:" + danmu.RenderSize.Width;
+            danmu.FontSize = 18;
             danmu.Margin = new Thickness(0, y, 0, 0);
+            danmu.HorizontalAlignment = HorizontalAlignment.Left;
+            danmu.VerticalAlignment = VerticalAlignment.Top;
+            danmu.TextAlignment = TextAlignment.Justify;
             danmu.LineHeight = lineHeight;
             danmu.Background = Brushes.Red;
             Size danmuSize = MeasureText(danmu);
@@ -70,7 +77,7 @@ namespace Danmu
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = Playground.RenderSize.Width;
             animation.To = -danmu.DesiredSize.Width - 1000;
-            animation.SpeedRatio = 0.1;
+            animation.SpeedRatio = 0.05;
             TranslateTransform transform = new TranslateTransform();
             danmu.RenderTransform = transform;
             transform.BeginAnimation(TranslateTransform.XProperty, animation);
@@ -90,10 +97,7 @@ namespace Danmu
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                Shoot();
-            }
+            Shoot();
         }
     }
 }
