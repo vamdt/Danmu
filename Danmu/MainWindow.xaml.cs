@@ -30,12 +30,13 @@ namespace Danmu
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             linesCount = ((int)(Playground.ActualHeight - paddingTop)) % lineHeight;
-
+            lines = new bool[linesCount];
         }
 
-        private double paddingTop = 5;
+        private double paddingTop = 25;
         private int lineHeight = 20;
         private int linesCount;
+        private bool[] lines;
 
         private Random rand = new Random();
 
@@ -46,7 +47,16 @@ namespace Danmu
 
         private int RandomLineNumber()
         {
-            return rand.Next(1, linesCount + 1);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (!lines[i])
+                {
+                    lines[i] = true;
+                    return i;
+                }
+            }
+            lines = new bool[linesCount];
+            return RandomLineNumber();
         }
 
 
