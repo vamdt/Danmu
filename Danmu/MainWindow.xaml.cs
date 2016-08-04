@@ -30,7 +30,6 @@ namespace Danmu
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             linesCount = ((int)(Playground.ActualHeight - paddingTop)) / lineHeight;
-            MessageBox.Show("window height" + Playground.ActualHeight + "lines count:" + linesCount.ToString());
             lines = new bool[linesCount];
         }
 
